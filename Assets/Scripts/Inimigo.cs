@@ -48,7 +48,7 @@ public class Inimigo : MonoBehaviour
 
     void Mover()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position - offset, speed);
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position - offset, speed * Time.timeScale);
     }
 
     void Ataque()
