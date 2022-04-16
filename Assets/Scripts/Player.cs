@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    private SceneController sm;
+
     public Rigidbody2D rb;
     private float movSpeed = 5;
     public Vector2 mov;
     private bool viraDir = true;
 
+    public Image hpBar;
     public float vida, fullvida = 100;
+
     public bool canDano = true; // se pode tomar ataque
 
     public bool enemyInRange = false, canAttack = true, atacando = false;
@@ -21,14 +26,18 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         vida = fullvida;
+        hpBar = GameObject.Find("Life").GetComponent<Image>();
+        sm = GameObject.Find("SceneManager").GetComponent<SceneController>();
     }
 
     void Update()
     {
         Ataque();
 
-        if (vida <= 0) { vida = 0; }
+        if (vida <= 0) { vida = 0; sm.ChangeScene("GameOver"); }
         else if (vida > fullvida) { vida = fullvida; }
+
+        hpBar.fillAmount = vida / fullvida;
 
         if (mov.x > 0 && !viraDir || mov.x < 0 && viraDir)
         {
