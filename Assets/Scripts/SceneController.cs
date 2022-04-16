@@ -9,4 +9,16 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene(nome);
     }
+
+    public void FirstTimeGame()
+    {
+        if (PlayerPrefs.GetInt("firstTime") == 0)
+        {
+            SceneManager.LoadScene("Cutscene");
+        }
+        else
+        {
+            SceneManager.LoadScene("Jogo");
+        }
+    }
 }
