@@ -47,7 +47,6 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-<<<<<<< HEAD
         Movimentacao(); 
     }
 
@@ -67,9 +66,7 @@ public class Player : MonoBehaviour
             vida += cura;
             vidasExtra--;
         }
-=======
         Movimentacao();
->>>>>>> parent of 7b35c12 (new features)
     }
 
     void Movimentacao()

@@ -599,6 +599,7 @@ Transform:
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &392689165
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,6 +734,8 @@ CanvasRenderer:
   m_CullTransparentMesh: 1
 =======
 >>>>>>> parent of 7b35c12 (new features)
+=======
+>>>>>>> parent of 7b35c12 (new features)
 --- !u!1 &481465983
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,9 +796,12 @@ RectTransform:
   - {fileID: 638360318}
   - {fileID: 194544129}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: 223734340}
   m_Father: {fileID: 1487160739}
 =======
+=======
+>>>>>>> parent of 7b35c12 (new features)
   m_Father: {fileID: 1601564546}
 >>>>>>> parent of 7b35c12 (new features)
   m_RootOrder: 0
@@ -884,7 +890,11 @@ Transform:
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_LocalPosition: {x: -0.02, y: -0.18, z: -10}
+=======
+  m_LocalPosition: {x: -0.31, y: -0.1, z: -10}
+>>>>>>> parent of 7b35c12 (new features)
 =======
   m_LocalPosition: {x: -0.31, y: -0.1, z: -10}
 >>>>>>> parent of 7b35c12 (new features)
@@ -927,6 +937,7 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< HEAD
 <<<<<<< HEAD
 --- !u!1001 &593754707
 PrefabInstance:
@@ -1052,6 +1063,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f0b69ebc3591584898e829f24513c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+>>>>>>> parent of 7b35c12 (new features)
 =======
 >>>>>>> parent of 7b35c12 (new features)
 --- !u!1 &638360317
@@ -1227,7 +1240,11 @@ Transform:
   m_GameObject: {fileID: 839649994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_LocalPosition: {x: -0.02, y: -0.18, z: -10}
+=======
+  m_LocalPosition: {x: -0.31, y: -0.1, z: -10}
+>>>>>>> parent of 7b35c12 (new features)
 =======
   m_LocalPosition: {x: -0.31, y: -0.1, z: -10}
 >>>>>>> parent of 7b35c12 (new features)
@@ -2025,6 +2042,9 @@ RectTransform:
 =======
   - {fileID: 512504948}
   - {fileID: 36443099}
+<<<<<<< HEAD
+>>>>>>> parent of 7b35c12 (new features)
+=======
 >>>>>>> parent of 7b35c12 (new features)
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -2388,7 +2408,11 @@ PrefabInstance:
     - target: {fileID: 6569804721665118132, guid: db1355c01a7f827489f5c1cbf644dc41, type: 3}
       propertyPath: m_LocalPosition.y
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: -0.18
+=======
+      value: -0.1
+>>>>>>> parent of 7b35c12 (new features)
 =======
       value: -0.1
 >>>>>>> parent of 7b35c12 (new features)
