@@ -5,7 +5,7 @@ using UnityEngine;
 public class Inimigo : MonoBehaviour
 {
     public float cooldown = .5f, dano = 10, vida = 30;
-    private float speed = .01f;
+    private float speed = .1f;
 
     private bool playerInRange = false, canAttack = true;
     public bool atacou = false;
@@ -18,7 +18,7 @@ public class Inimigo : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
         cam = GameObject.Find("CM vcam1");
         offset = new Vector3(.5f,0,0);
