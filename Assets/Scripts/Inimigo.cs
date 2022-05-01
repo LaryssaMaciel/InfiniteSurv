@@ -67,6 +67,11 @@ public class Inimigo : MonoBehaviour
         {
             playerInRange = true;
         }
+        if (col.gameObject.tag == "Bullet")
+        {
+            vida -= 10;
+            Destroy(col.gameObject);
+        }
     }
 
     void OnTriggerExit2D(Collider2D col)

@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
 
     private SceneController sm;
 
+    public GameObject pTiro, posTiro;
+    public string tipoAtaque = "tiro";
+
     public Rigidbody2D rb;
     private float movSpeed = 5, moveforce = 5f;
     public Vector2 mov;
@@ -53,8 +56,6 @@ public class Player : MonoBehaviour
  
     void Update()
     {
-        //Ataque();
-        
         if (timeBtwAttack <= 0) { timeBtwAttack = 0; }
         else { timeBtwAttack -= Time.deltaTime; }
 
@@ -67,11 +68,15 @@ public class Player : MonoBehaviour
 
         if (mov.x > 0 && !viraDir || mov.x < 0 && viraDir) { Flip(); } 
 
-
         float xValidPosition = Mathf.Clamp(transform.position.x, xMin, xMax);
         float yValidPosition = Mathf.Clamp(transform.position.y, yMin, yMax);
  
         transform.position = new Vector3(xValidPosition, yValidPosition, 0f);
+
+        if (Input.GetButton("Fire1"))
+        {
+            Ataque();
+        }
     }
     
     void FixedUpdate()
@@ -112,20 +117,23 @@ public class Player : MonoBehaviour
         viraDir =! viraDir;
     }
 
-    public void Ataque()
+    public void Ataque() // curta distancia
     {
         if (timeBtwAttack <= 0)
         {
             canAttack = true;
             if (canAttack)
             {
-                Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemiesLayer);
-                for (int i = 0; i < enemies.Length; i++)
+                if (tipoAtaque == "axe")
                 {
-                    enemies[i].GetComponent<Inimigo>().vida -= ataqueValor;
-                    Vector3 direction = (enemies[i].transform.position - transform.position);
-                    enemies[i].GetComponent<Inimigo>().rb.AddForce(direction * 500);
-                    StartCoroutine(AttackCooldown(enemies[i]));
+                    Ataque1();
+                    startTimeBtwAttack = .3f;
+                }
+                else 
+                if (tipoAtaque == "tiro")
+                {
+                    Ataque2();
+                    startTimeBtwAttack = .2f;
                 }
             }
             timeBtwAttack = startTimeBtwAttack;
@@ -136,6 +144,32 @@ public class Player : MonoBehaviour
             canAttack = false;
         }
     }
+
+    public void Ataque1() // ataque curta distancia
+    {
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemiesLayer);
+        if (enemies != null)
+        {
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                enemies[i].GetComponent<Inimigo>().vida -= ataqueValor;
+                Vector3 direction = (enemies[i].transform.position - transform.position);
+                enemies[i].GetComponent<Inimigo>().rb.AddForce(direction * 500);
+                StartCoroutine(AttackCooldown(enemies[i]));
+            }
+        }
+    }
+
+    public void Ataque2() // ataque longa distancia
+    {
+        GameObject a = Instantiate(pTiro, posTiro.transform.position, posTiro.transform.rotation);
+        float angle = Mathf.Atan2(fj.Horizontal, fj.Vertical) * Mathf.Rad2Deg;
+        posTiro.transform.eulerAngles = new Vector3(0,0, -angle);
+        a.GetComponent<Rigidbody2D>().AddForce(posTiro.transform.up * 20, ForceMode2D.Impulse);
+        StartCoroutine(WaitBullet(a));
+    }
+
+    IEnumerator WaitBullet(GameObject a) { yield return new WaitForSeconds(1f); Destroy(a); }
 
     IEnumerator AttackCooldown(Collider2D obj) // no inimigo
     {

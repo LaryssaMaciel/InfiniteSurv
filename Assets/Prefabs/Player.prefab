@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3034973748858092786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3639331262849416817}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3639331262849416817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3034973748858092786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.81, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6569804721665118132}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6569804721665118155
 GameObject:
   m_ObjectHideFlags: 0
@@ -29,9 +59,10 @@ Transform:
   m_GameObject: {fileID: 6569804721665118155}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.9134, y: 0.5433, z: 0}
-  m_LocalScale: {x: 0.11156821, y: 0.20442076, z: 0.24402}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0}
   m_Children:
   - {fileID: 6569804723261358198}
+  - {fileID: 3639331262849416817}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -75,7 +106,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c175a75c9eced5a4a9b2bad456cb7d16, type: 3}
+  m_Sprite: {fileID: 8544386628872229186, guid: ab7ec7edeff9e6e4694b8ddda11c518a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,7 +137,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &6569804721665118152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +151,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapa: {fileID: 0}
+  fj: {fileID: 0}
+  pTiro: {fileID: 1686121955160269362, guid: ec14c93a853e84946b831c9975dce750, type: 3}
+  posTiro: {fileID: 3034973748858092786}
   rb: {fileID: 0}
   mov: {x: 0, y: 0}
   hpBar: {fileID: 0}
@@ -134,11 +168,12 @@ MonoBehaviour:
   ataqueValor: 10
   timeBtwAttack: 0
   startTimeBtwAttack: 0.1
-  attackRange: 0.68
+  attackRange: 1.11
   attackPos: {fileID: 6569804723261358198}
   enemiesLayer:
     serializedVersion: 2
     m_Bits: 64
+  tipoAtaque: axe
 --- !u!70 &4158846056504510748
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -153,7 +188,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 7.84, y: 6.48}
+  m_Size: {x: 3.11, y: 4.86}
   m_Direction: 0
 --- !u!1 &6569804723261358473
 GameObject:
@@ -179,7 +214,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6569804723261358473}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0.64, y: -0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6569804721665118132}
