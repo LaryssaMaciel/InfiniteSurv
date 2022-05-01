@@ -44,7 +44,7 @@ public class WavesManager : MonoBehaviour
         switch(wave)
         {
             case 3-1: // nº q quer - 1 (resolver isso)
-                spawns = 2;
+                spawns = 5;
                 break;
             case 4-1:
                 tipo = 1;

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6569804721665118132}
   - component: {fileID: 6569804721665118134}
+  - component: {fileID: 6569804721665118153}
   - component: {fileID: 6569804721665118152}
   - component: {fileID: 4158846056504510748}
   - component: {fileID: 8199753053966266414}
@@ -156,6 +157,90 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< HEAD
+=======
+--- !u!50 &6569804721665118134
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569804721665118155}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!70 &6569804721665118153
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569804721665118155}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.03453112, y: -0.018846879}
+  m_Size: {x: 6.59, y: 6.03}
+  m_Direction: 0
+--- !u!114 &6569804721665118152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569804721665118155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0b69ebc3591584898e829f24513c9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  mov: {x: 0, y: 0}
+  vida: 100
+  fullvida: 100
+  canDano: 1
+  enemyInRange: 0
+  canAttack: 1
+  atacando: 0
+  ataqueValor: 10
+  timeBtwAttack: 0
+  startTimeBtwAttack: 0.1
+  attackRange: 0.68
+  attackPos: {fileID: 6569804723261358198}
+  enemiesLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!70 &4158846056504510748
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569804721665118155}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 7.84, y: 6.48}
+  m_Direction: 0
+>>>>>>> parent of 7b35c12 (new features)
 --- !u!1 &6569804723261358473
 GameObject:
   m_ObjectHideFlags: 0
