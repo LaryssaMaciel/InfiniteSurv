@@ -5,15 +5,23 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    private float xMin, xMax, yMin, yMax;
+    public SpriteRenderer mapa;
+
+    public FixedJoystick fj;
+
     private SceneController sm;
 
     public Rigidbody2D rb;
-    private float movSpeed = 5;
+    private float movSpeed = 5, moveforce = 5f;
     public Vector2 mov;
     private bool viraDir = true;
 
     public Image hpBar;
-    public float vida, fullvida = 100;
+    public float vida, fullvida = 100, cura = 10;
+
+    public int vidasExtra = 0;
+    private Text curasNum;
 
     public bool canDano = true; // se pode tomar ataque
 
@@ -28,29 +36,50 @@ public class Player : MonoBehaviour
         vida = fullvida;
         hpBar = GameObject.Find("Life").GetComponent<Image>();
         sm = GameObject.Find("SceneManager").GetComponent<SceneController>();
-    }
+        curasNum = GameObject.Find("Coletados").GetComponent<Text>();
+        fj = GameObject.FindGameObjectWithTag("joystick").GetComponent<FixedJoystick>();
 
+        var spriteSize = GetComponent<SpriteRenderer>().bounds.size.y * .5f; // Working with a simple box here, adapt to you necessity
+ 
+        var camHeight = mapa.bounds.size.y/2;
+        var camWidth = mapa.bounds.size.x/2;
+
+        yMin = -camHeight + spriteSize; // lower bound
+        yMax = camHeight - spriteSize; // upper bound
+        
+        xMin = -camWidth + spriteSize; // left bound
+        xMax = camWidth - spriteSize; // right bound 
+    }
+ 
     void Update()
     {
-        Ataque();
+        //Ataque();
+        
+        if (timeBtwAttack <= 0) { timeBtwAttack = 0; }
+        else { timeBtwAttack -= Time.deltaTime; }
 
         if (vida <= 0) { vida = 0; sm.ChangeScene("GameOver"); }
         else if (vida > fullvida) { vida = fullvida; }
 
         hpBar.fillAmount = vida / fullvida;
 
-        if (mov.x > 0 && !viraDir || mov.x < 0 && viraDir)
-        {
-            Flip();
-        } 
-    }
+        curasNum.text = vidasExtra.ToString();
 
+        if (mov.x > 0 && !viraDir || mov.x < 0 && viraDir) { Flip(); } 
+
+
+        float xValidPosition = Mathf.Clamp(transform.position.x, xMin, xMax);
+        float yValidPosition = Mathf.Clamp(transform.position.y, yMin, yMax);
+ 
+        transform.position = new Vector3(xValidPosition, yValidPosition, 0f);
+    }
+    
     void FixedUpdate()
     {
         Movimentacao(); 
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
         if (col.gameObject.tag == "cura")
         {
@@ -66,12 +95,11 @@ public class Player : MonoBehaviour
             vida += cura;
             vidasExtra--;
         }
-        Movimentacao();
     }
 
     void Movimentacao()
     {
-        mov = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        mov = new Vector2(fj.Horizontal * moveforce, fj.Vertical * moveforce);
         rb.MovePosition(rb.position + mov.normalized * movSpeed * Time.fixedDeltaTime);
     }
 
@@ -84,12 +112,12 @@ public class Player : MonoBehaviour
         viraDir =! viraDir;
     }
 
-    void Ataque()
+    public void Ataque()
     {
         if (timeBtwAttack <= 0)
         {
             canAttack = true;
-            if (Input.GetButton("Fire1") && canAttack)
+            if (canAttack)
             {
                 Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemiesLayer);
                 for (int i = 0; i < enemies.Length; i++)
@@ -104,7 +132,7 @@ public class Player : MonoBehaviour
         }
         else 
         { 
-            timeBtwAttack -= Time.deltaTime; 
+            
             canAttack = false;
         }
     }
@@ -123,6 +151,4 @@ public class Player : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
     }
-
-
 }
