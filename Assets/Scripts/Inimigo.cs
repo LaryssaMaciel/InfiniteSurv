@@ -67,9 +67,9 @@ public class Inimigo : MonoBehaviour
         {
             playerInRange = true;
         }
-        if (col.gameObject.tag == "Bullet")
+        if (col.gameObject.tag == "bullet")
         {
-            vida -= 10;
+            this.vida -= player.GetComponent<Player>().ataqueValor;
             Destroy(col.gameObject);
         }
     }

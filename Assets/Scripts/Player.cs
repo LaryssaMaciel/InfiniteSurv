@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     private SceneController sm;
 
     public GameObject pTiro, posTiro;
-    public string tipoAtaque = "tiro";
+    public string tipoAtaque = "axe";
 
     public Rigidbody2D rb;
     private float movSpeed = 5, moveforce = 5f;
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     public float vida, fullvida = 100, cura = 10;
 
     public int vidasExtra = 0;
-    private Text curasNum;
+    public Text curasNum;
 
     public bool canDano = true; // se pode tomar ataque
 
@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     public float ataqueValor = 10, timeBtwAttack, startTimeBtwAttack = .3f, attackRange;
     public Transform attackPos;
     public LayerMask enemiesLayer;
+
+    public ChangeManager cm;
 
     void Awake()
     {
@@ -41,6 +43,7 @@ public class Player : MonoBehaviour
         sm = GameObject.Find("SceneManager").GetComponent<SceneController>();
         curasNum = GameObject.Find("Coletados").GetComponent<Text>();
         fj = GameObject.FindGameObjectWithTag("joystick").GetComponent<FixedJoystick>();
+        cm = GameObject.Find("Item").GetComponent<ChangeManager>();
 
         var spriteSize = GetComponent<SpriteRenderer>().bounds.size.y * .5f; // Working with a simple box here, adapt to you necessity
  
@@ -73,7 +76,7 @@ public class Player : MonoBehaviour
  
         transform.position = new Vector3(xValidPosition, yValidPosition, 0f);
 
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
             Ataque();
         }
@@ -88,6 +91,10 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.tag == "cura")
         {
+            if (vidasExtra <= 0)
+            {
+                cm.lista.Add("cura");
+            } 
             vidasExtra++;
             Destroy(col.gameObject);
         }
@@ -126,12 +133,14 @@ public class Player : MonoBehaviour
             {
                 if (tipoAtaque == "axe")
                 {
+                    ataqueValor = 10;
                     Ataque1();
                     startTimeBtwAttack = .3f;
                 }
                 else 
                 if (tipoAtaque == "tiro")
                 {
+                    ataqueValor = 5;
                     Ataque2();
                     startTimeBtwAttack = .2f;
                 }
