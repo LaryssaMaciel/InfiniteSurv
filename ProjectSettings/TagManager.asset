@@ -13,6 +13,7 @@ TagManager:
   - gun
   - fjatk
   - bg
+  - imgB
   layers:
   - Default
   - TransparentFX

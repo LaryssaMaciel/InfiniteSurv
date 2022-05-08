@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
     // others
     private ChangeManager cm;
     private SceneController sm;
+    private GameObject imgB;
 
     void Awake()
     {
@@ -63,9 +64,11 @@ public class Player : MonoBehaviour
         cm = GameObject.Find("Armas").GetComponent<ChangeManager>();
         
         mapa = GameObject.FindGameObjectWithTag("bg").GetComponent<SpriteRenderer>();
+        imgB = GameObject.FindGameObjectWithTag("imgB");
         fj = GameObject.FindGameObjectWithTag("joystick").GetComponent<FixedJoystick>();
         fjatk = GameObject.FindGameObjectWithTag("fjatk").GetComponent<FixedJoystick>();
 
+        imgB.SetActive(false);
         vida = fullvida;
         LimitCamera();
     }
@@ -91,7 +94,7 @@ public class Player : MonoBehaviour
 
     void Animacoes()
     {
-        if (!damaged && !swing)
+        if (!damaged && !swing && !dead)
         {
             animator.SetFloat("speed", mov.sqrMagnitude);
             animator.SetFloat("vertical", rbmov.y);
@@ -100,11 +103,11 @@ public class Player : MonoBehaviour
         if (swing) { animator.SetTrigger("swing"); swing = false; }
         if (damaged) { animator.SetTrigger("damaged"); damaged = false; }
         if (dead) { animator.SetTrigger("dead"); }
-    }
+    } 
 
     void LimitCamera()
     {
-        var spriteSize = GetComponent<SpriteRenderer>().bounds.size.y * .5f; // Working with a simple box here, adapt to you necessity
+        var spriteSize = imgB.GetComponent<SpriteRenderer>().bounds.size.y * .5f; // Working with a simple box here, adapt to you necessity
         
         var camHeight = mapa.bounds.size.y/2;
         var camWidth = mapa.bounds.size.x/2;

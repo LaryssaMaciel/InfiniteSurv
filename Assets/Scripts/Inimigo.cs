@@ -92,7 +92,7 @@ public class Inimigo : MonoBehaviour
         yield return new WaitForSeconds(cooldown);
 
         player.GetComponent<Player>().canDano = true;
-        player.GetComponent<Player>().damaged = false;
+        
         canAttack = true;
         atacou = false;
     }
