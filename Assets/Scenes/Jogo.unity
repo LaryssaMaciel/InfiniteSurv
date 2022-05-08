@@ -407,10 +407,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.98971754, y: 0.988081}
-      - {x: -0.9738145, y: 0.9954075}
-      - {x: -0.96649086, y: -0.98343277}
-      - {x: 0.98127985, y: -0.98700583}
+    - - {x: 1.1663816, y: 1.2476449}
+      - {x: -1.1841286, y: 1.2405514}
+      - {x: -1.1852176, y: -1.2718372}
+      - {x: 1.1747689, y: -1.26099}
 --- !u!4 &136974096
 Transform:
   m_ObjectHideFlags: 0
@@ -3031,17 +3031,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
   m_PrefabInstance: {fileID: 593754707}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1690189813 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2929252283123773951, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
-  m_PrefabInstance: {fileID: 593754707}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45977bbae16431c46a013576a1aea384, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1813961577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3097,16 +3086,12 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6569804721665118152, guid: db1355c01a7f827489f5c1cbf644dc41, type: 3}
-      propertyPath: fj
-      value: 
-      objectReference: {fileID: 1690189813}
+    - target: {fileID: 6569804721665118135, guid: db1355c01a7f827489f5c1cbf644dc41, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6569804721665118152, guid: db1355c01a7f827489f5c1cbf644dc41, type: 3}
       propertyPath: cam
-      value: 
-      objectReference: {fileID: 136974097}
-    - target: {fileID: 6569804721665118152, guid: db1355c01a7f827489f5c1cbf644dc41, type: 3}
-      propertyPath: mapa
       value: 
       objectReference: {fileID: 136974097}
     - target: {fileID: 6569804721665118152, guid: db1355c01a7f827489f5c1cbf644dc41, type: 3}
@@ -3410,7 +3395,7 @@ GameObject:
   - component: {fileID: 2032648700}
   m_Layer: 0
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: bg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

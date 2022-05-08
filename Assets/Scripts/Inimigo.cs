@@ -86,12 +86,13 @@ public class Inimigo : MonoBehaviour
     {
         canAttack = false;
         player.GetComponent<Player>().canDano = false;
-        
+        player.GetComponent<Player>().damaged = true;
         cam.GetComponent<CameraShake>().shake = true;
 
         yield return new WaitForSeconds(cooldown);
 
         player.GetComponent<Player>().canDano = true;
+        player.GetComponent<Player>().damaged = false;
         canAttack = true;
         atacou = false;
     }

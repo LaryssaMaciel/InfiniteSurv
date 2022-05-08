@@ -5,55 +5,68 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [Header("Background")]
-    private float xMin, xMax, yMin, yMax; // bordas pra limitar câmera de sair do mapa
+    [Header("BACKGROUND")]
     public SpriteRenderer mapa; // background
+    private float xMin, xMax, yMin, yMax; // bordas pra limitar câmera de sair do mapa
 
-    [Header("Joysticks")]
-    public FixedJoystick fj, fjatk; // joysticks -> Mov | Ataque
+    [Header("JOYSTICKS")]
+    public FixedJoystick fj; // Movement
+    public FixedJoystick fjatk; // Ataque
 
-    [Header("Shoot")]
-    public GameObject pTiro, posTiro;
-    public string tipoAtaque = "axe";
-    private bool atk2down = false;
-
-    [Header("Movimentação")]
+    [Header("MOVIMENTAÇÃO")]
     public Rigidbody2D rb;
     private float movSpeed = 5, moveforce = 5f;
-    public Vector2 mov;
+    public Vector2 mov, rbmov;
     private bool viraDir = true;
 
-    [Header("Vida")]
+    [Header("VIDA")]
     public Image hpBar;
     public float vida, fullvida = 100, cura = 10;
 
-    [Header("Cura")]
+    [Header("CURA")]
     public int vidasExtra = 0;
     private GameObject vidasBtn;
     public Text curasNum;
 
-    [Header("Ataque/Dano")]
+    [Header("ATAQUE/DANO")]
+    public string tipoAtaque = "axe";
     public bool canDano = true; // se pode tomar ataque
+    public bool damaged = false;
     public bool enemyInRange = false, canAttack = true, atacando = false;
     public float ataqueValor = 10, timeBtwAttack, startTimeBtwAttack = .3f, attackRange;
     public Transform attackPos;
     public LayerMask enemiesLayer;
 
-    [Header("Others")]
-    public ChangeManager cm;
+    [Header("TIRO")]
+    public GameObject pTiro;
+    public GameObject posTiro;
+    private bool atk2down = false;
+    
+    [Header("Animacao")]
+    public string animState = "idle";
+    private bool swing = false, dead = false;
+    private Animator animator;
+
+    // others
+    private ChangeManager cm;
     private SceneController sm;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        vida = fullvida;
+        animator = GetComponent<Animator>();
+        
+        vidasBtn = GameObject.Find("Curas");
         hpBar = GameObject.Find("Life").GetComponent<Image>();
         sm = GameObject.Find("SceneManager").GetComponent<SceneController>();
         curasNum = GameObject.Find("Coletados").GetComponent<Text>();
+        cm = GameObject.Find("Armas").GetComponent<ChangeManager>();
+        
+        mapa = GameObject.FindGameObjectWithTag("bg").GetComponent<SpriteRenderer>();
         fj = GameObject.FindGameObjectWithTag("joystick").GetComponent<FixedJoystick>();
         fjatk = GameObject.FindGameObjectWithTag("fjatk").GetComponent<FixedJoystick>();
-        cm = GameObject.Find("Armas").GetComponent<ChangeManager>();
-        vidasBtn = GameObject.Find("Curas");
+
+        vida = fullvida;
         LimitCamera();
     }
  
@@ -62,27 +75,31 @@ public class Player : MonoBehaviour
         if (timeBtwAttack <= 0) { timeBtwAttack = 0; }
         else { timeBtwAttack -= Time.deltaTime; }
 
+        if (dead) { canDano = false; }
+
+        VidaManager();
+        CuraManager();
+        FlipManager();
+        Animacoes();
         Ataque2();
-
-        if (vida <= 0) { vida = 0; sm.ChangeScene("GameOver"); }
-        else if (vida > fullvida) { vida = fullvida; }
-        hpBar.fillAmount = vida / fullvida;
-
-        curasNum.text = vidasExtra.ToString();
-        if (vidasExtra <= 0) { vidasBtn.SetActive(false); }
-        else { vidasBtn.SetActive(true); }
-
-        if (mov.x > 0 && !viraDir || mov.x < 0 && viraDir) { Flip(); } 
-
-        float xValidPosition = Mathf.Clamp(transform.position.x, xMin, xMax);
-        float yValidPosition = Mathf.Clamp(transform.position.y, yMin, yMax);
- 
-        transform.position = new Vector3(xValidPosition, yValidPosition, 0f);
-    }
+    } 
     
     void FixedUpdate()
     {
         Movimentacao(); 
+    }
+
+    void Animacoes()
+    {
+        if (!damaged && !swing)
+        {
+            animator.SetFloat("speed", mov.sqrMagnitude);
+            animator.SetFloat("vertical", rbmov.y);
+        }
+
+        if (swing) { animator.SetTrigger("swing"); swing = false; }
+        if (damaged) { animator.SetTrigger("damaged"); damaged = false; }
+        if (dead) { animator.SetTrigger("dead"); }
     }
 
     void LimitCamera()
@@ -114,6 +131,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    void VidaManager()
+    {
+        if (vida <= 0) { vida = 0; dead = true; StartCoroutine(Death()); }
+        else if (vida > fullvida) { vida = fullvida; }
+        hpBar.fillAmount = vida / fullvida;
+    }
+
+    IEnumerator Death()
+    {
+        yield return new WaitForSeconds(2f);
+        sm.ChangeScene("GameOver"); 
+    }
+
     public void Curar()
     {
         if (vida < fullvida && vidasExtra > 0)
@@ -122,11 +152,19 @@ public class Player : MonoBehaviour
             vidasExtra--;
         }
     }
-
+    
+    void CuraManager()
+    {
+        curasNum.text = vidasExtra.ToString();
+        if (vidasExtra <= 0) { vidasBtn.SetActive(false); }
+        else { vidasBtn.SetActive(true); }
+    }
+    
     void Movimentacao()
     {
         mov = new Vector2(fj.Horizontal * moveforce, fj.Vertical * moveforce);
         rb.MovePosition(rb.position + mov.normalized * movSpeed * Time.fixedDeltaTime);
+        rbmov = rb.position;
     }
 
     void Flip()
@@ -135,6 +173,16 @@ public class Player : MonoBehaviour
         currentScale.x *= -1;
         gameObject.transform.localScale = currentScale;
         viraDir =! viraDir;
+    }
+
+    void FlipManager()
+    {
+        if (mov.x > 0 && !viraDir || mov.x < 0 && viraDir) { Flip(); } 
+
+        float xValidPosition = Mathf.Clamp(transform.position.x, xMin, xMax);
+        float yValidPosition = Mathf.Clamp(transform.position.y, yMin, yMax);
+ 
+        transform.position = new Vector3(xValidPosition, yValidPosition, 0f);
     }
 
     public void Ataque() // curta distancia
@@ -154,8 +202,13 @@ public class Player : MonoBehaviour
                 atk2down = true;
             }
             timeBtwAttack = startTimeBtwAttack;
+            swing = true;
         }
-        else { canAttack = false; }
+        else 
+        { 
+            swing = false;
+            canAttack = false; 
+        }
     }
 
     public void Atk2Up() { atk2down = false; }
