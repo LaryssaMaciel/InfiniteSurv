@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    public static SceneController sc;
+    void Awake() { sc = this; }
+
     public void ChangeScene(string nome)
     {
         SceneManager.LoadScene(nome);

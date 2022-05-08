@@ -9,6 +9,8 @@ TagManager:
   - bordas
   - joystick
   - bullet
+  - troca
+  - gun
   layers:
   - Default
   - TransparentFX

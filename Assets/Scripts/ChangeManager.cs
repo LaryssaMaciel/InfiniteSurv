@@ -14,21 +14,16 @@ public class ChangeManager : MonoBehaviour
     
     void Start()
     {
-        texto = GameObject.Find("Coletados").GetComponent<Text>();
+        texto = GameObject.Find("txtArma").GetComponent<Text>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         lista.Add("axe");
-        lista.Add("tiro");
     }
 
-    void Update() // PQ ISSO N FUNCIONA???
+    void Update() 
     {
         if (itemNum > lista.Count -1) { itemNum = 0; }
         texto.text = item;
-    }
 
-    public void Troca()
-    {
-        itemNum++;
         switch (lista[itemNum])
         {
             case "axe":
@@ -39,18 +34,20 @@ public class ChangeManager : MonoBehaviour
                 item = "Gun";
                 player.tipoAtaque = "tiro";
                 break;
-            case "cura":
-                item = "Health\n" + player.vidasExtra.ToString();
-                break;
+            // case "cura":
+            //     item = "Health\n" + player.vidasExtra.ToString();
+            //     break;
         }
+    }
+
+    public void Troca()
+    {
+        itemNum++;
         print(lista[itemNum]);
     }
 
-    public void Curar_()
-    {
-        if (item == "cura")
-        {
-            player.Curar();
-        }
-    }
+    // public void Curar_()
+    // {
+    //     if (lista[itemNum] == "cura") { player.Curar(); }
+    // }
 }

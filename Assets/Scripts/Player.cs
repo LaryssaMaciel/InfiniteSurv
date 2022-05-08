@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     public float vida, fullvida = 100, cura = 10;
 
     public int vidasExtra = 0;
+    private GameObject vidasBtn;
     public Text curasNum;
 
     public bool canDano = true; // se pode tomar ataque
@@ -43,7 +44,8 @@ public class Player : MonoBehaviour
         sm = GameObject.Find("SceneManager").GetComponent<SceneController>();
         curasNum = GameObject.Find("Coletados").GetComponent<Text>();
         fj = GameObject.FindGameObjectWithTag("joystick").GetComponent<FixedJoystick>();
-        cm = GameObject.Find("Item").GetComponent<ChangeManager>();
+        cm = GameObject.Find("Armas").GetComponent<ChangeManager>();
+        vidasBtn = GameObject.Find("Curas");
 
         var spriteSize = GetComponent<SpriteRenderer>().bounds.size.y * .5f; // Working with a simple box here, adapt to you necessity
  
@@ -64,10 +66,11 @@ public class Player : MonoBehaviour
 
         if (vida <= 0) { vida = 0; sm.ChangeScene("GameOver"); }
         else if (vida > fullvida) { vida = fullvida; }
-
         hpBar.fillAmount = vida / fullvida;
-
+        
         curasNum.text = vidasExtra.ToString();
+        if (vidasExtra <= 0) { vidasBtn.SetActive(false); }
+        else { vidasBtn.SetActive(true); }
 
         if (mov.x > 0 && !viraDir || mov.x < 0 && viraDir) { Flip(); } 
 
@@ -75,11 +78,6 @@ public class Player : MonoBehaviour
         float yValidPosition = Mathf.Clamp(transform.position.y, yMin, yMax);
  
         transform.position = new Vector3(xValidPosition, yValidPosition, 0f);
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Ataque();
-        }
     }
     
     void FixedUpdate()
@@ -91,11 +89,13 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.tag == "cura")
         {
-            if (vidasExtra <= 0)
-            {
-                cm.lista.Add("cura");
-            } 
             vidasExtra++;
+            Destroy(col.gameObject);
+        }
+
+        if (col.gameObject.tag == "gun")
+        {
+            cm.lista.Add("tiro");
             Destroy(col.gameObject);
         }
     }
@@ -117,7 +117,6 @@ public class Player : MonoBehaviour
 
     void Flip()
     {
-        //gameObject.GetComponent<SpriteRenderer>().flip = 
         Vector3 currentScale = gameObject.transform.localScale;
         currentScale.x *= -1;
         gameObject.transform.localScale = currentScale;
@@ -142,7 +141,7 @@ public class Player : MonoBehaviour
                 {
                     ataqueValor = 5;
                     Ataque2();
-                    startTimeBtwAttack = .2f;
+                    startTimeBtwAttack = 0;
                 }
             }
             timeBtwAttack = startTimeBtwAttack;
