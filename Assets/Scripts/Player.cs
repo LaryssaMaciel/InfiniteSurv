@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private float xMin, xMax, yMin, yMax;
     public SpriteRenderer mapa;
 
-    public FixedJoystick fj;
+    public FixedJoystick fj, fjatk;
 
     private SceneController sm;
 
@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
         sm = GameObject.Find("SceneManager").GetComponent<SceneController>();
         curasNum = GameObject.Find("Coletados").GetComponent<Text>();
         fj = GameObject.FindGameObjectWithTag("joystick").GetComponent<FixedJoystick>();
+        fjatk = GameObject.FindGameObjectWithTag("fjatk").GetComponent<FixedJoystick>();
         cm = GameObject.Find("Armas").GetComponent<ChangeManager>();
         vidasBtn = GameObject.Find("Curas");
 
@@ -67,7 +68,7 @@ public class Player : MonoBehaviour
         if (vida <= 0) { vida = 0; sm.ChangeScene("GameOver"); }
         else if (vida > fullvida) { vida = fullvida; }
         hpBar.fillAmount = vida / fullvida;
-        
+
         curasNum.text = vidasExtra.ToString();
         if (vidasExtra <= 0) { vidasBtn.SetActive(false); }
         else { vidasBtn.SetActive(true); }
@@ -136,19 +137,18 @@ public class Player : MonoBehaviour
                     Ataque1();
                     startTimeBtwAttack = .3f;
                 }
-                else 
-                if (tipoAtaque == "tiro")
+                else if (tipoAtaque == "tiro")
                 {
+                    startTimeBtwAttack = 0;
                     ataqueValor = 5;
                     Ataque2();
-                    startTimeBtwAttack = 0;
+                    
                 }
+                timeBtwAttack = startTimeBtwAttack;
             }
-            timeBtwAttack = startTimeBtwAttack;
         }
         else 
         { 
-            
             canAttack = false;
         }
     }
@@ -171,8 +171,8 @@ public class Player : MonoBehaviour
     public void Ataque2() // ataque longa distancia
     {
         GameObject a = Instantiate(pTiro, posTiro.transform.position, posTiro.transform.rotation);
-        float angle = Mathf.Atan2(fj.Horizontal, fj.Vertical) * Mathf.Rad2Deg;
-        posTiro.transform.eulerAngles = new Vector3(0,0, -angle);
+        float angle = Mathf.Atan2(fjatk.Horizontal, fjatk.Vertical) * Mathf.Rad2Deg;
+        posTiro.transform.eulerAngles = new Vector3(0, 0, -angle);
         a.GetComponent<Rigidbody2D>().AddForce(posTiro.transform.up * 20, ForceMode2D.Impulse);
         StartCoroutine(WaitBullet(a));
     }

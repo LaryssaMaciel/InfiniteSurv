@@ -11,6 +11,7 @@ TagManager:
   - bullet
   - troca
   - gun
+  - fjatk
   layers:
   - Default
   - TransparentFX
