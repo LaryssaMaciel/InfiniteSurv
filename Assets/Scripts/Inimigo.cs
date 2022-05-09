@@ -12,26 +12,45 @@ public class Inimigo : MonoBehaviour
 
     private Vector3 offset;
 
-    private GameObject player;
+    private GameObject player, explosion;
+    private SpriteRenderer sp;
     public Rigidbody2D rb;
     private GameObject cam;
 
     void Awake()
     {
         player = GameObject.Find("Player");
+        explosion = this.gameObject.transform.GetChild(0).gameObject;
         rb = GetComponent<Rigidbody2D>();
         cam = GameObject.Find("CM vcam1");
         offset = new Vector3(.5f,0,0);
+        sp = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        Ataque();
-        Flip();
+        
 
-        if (!atacou) { Mover(); }
+        if (vida <= 0) 
+        {
+            StartCoroutine(Death()); 
+        }
+        else
+        {
+            Ataque();
+            Flip();
 
-        if (vida <= 0) { Destroy(this.gameObject); }
+            if (!atacou) { Mover(); }
+        }
+    }
+
+    IEnumerator Death()
+    {
+        explosion.SetActive(true);
+        // ficar invisivel
+        sp.enabled = false;
+        yield return new WaitForSeconds(.5f);
+        Destroy(this.gameObject);
     }
 
     void Flip() 
