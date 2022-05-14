@@ -22,7 +22,8 @@ public class ChangeManager : MonoBehaviour
     void Update() 
     {
         if (itemNum > lista.Count -1) { itemNum = 0; }
-        texto.text = item;
+
+        if (texto != null) { texto.text = item; }
 
         switch (lista[itemNum])
         {
