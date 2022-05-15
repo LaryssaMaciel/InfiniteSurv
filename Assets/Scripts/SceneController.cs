@@ -46,4 +46,30 @@ public class SceneController : MonoBehaviour
             pause = false;
         }
     }
+
+    // CONFIGURAÇÕES
+    public GameObject configPanel, menu;
+    public void OpenConfig()
+    {
+        configPanel.SetActive(true);
+        menu.SetActive(false);
+    }
+    public void CloseConfig()
+    {   
+        configPanel.SetActive(false);
+        menu.SetActive(true);
+    }
+
+    // CREDITS
+    public GameObject credits;
+    public void OpenCredits()
+    {
+        credits.SetActive(true);
+        menu.SetActive(false);
+    }
+    public void CloseCredits()
+    {   
+        credits.SetActive(false);
+        menu.SetActive(true);
+    }
 }
