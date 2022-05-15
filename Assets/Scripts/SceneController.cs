@@ -8,8 +8,20 @@ public class SceneController : MonoBehaviour
     public static SceneController sc;
     void Awake() { sc = this; }
 
+    public Animator animFade;
+
+    void Start()
+    {
+    }
+
     public void ChangeScene(string nome)
     {
+        animFade.SetTrigger("go");
+        StartCoroutine(Wait(nome));
+    }
+    IEnumerator Wait(string nome) 
+    {
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(nome);
     }
 
@@ -17,11 +29,11 @@ public class SceneController : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("firstTime") == 0)
         {
-            SceneManager.LoadScene("Cutscene");
+            ChangeScene("Cutscene");
         }
         else
         {
-            SceneManager.LoadScene("Jogo");
+            ChangeScene("Jogo");
         }
     }
 
