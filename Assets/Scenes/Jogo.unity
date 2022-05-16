@@ -667,7 +667,7 @@ PrefabInstance:
     - target: {fileID: 1538860793928725481, guid: eb411977385c5124f9c8a10eff919d5b, type: 3}
       propertyPath: configPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1347592675}
     - target: {fileID: 1538860793928725482, guid: eb411977385c5124f9c8a10eff919d5b, type: 3}
       propertyPath: m_Name
       value: SceneManager
@@ -981,6 +981,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5996264623908755708, guid: 8c3ea8af656776341abfb7a34b1e2921, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 198887919}
+    - target: {fileID: 5996264623908755708, guid: 8c3ea8af656776341abfb7a34b1e2921, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseConfig
+      objectReference: {fileID: 0}
     - target: {fileID: 5996264623990369153, guid: 8c3ea8af656776341abfb7a34b1e2921, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1254,7 +1262,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5643563, y: -0.6670876, z: -10}
+  m_LocalPosition: {x: -0.31, y: -0.58, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2229,6 +2237,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1347592675 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5996264622214422669, guid: 8c3ea8af656776341abfb7a34b1e2921, type: 3}
+  m_PrefabInstance: {fileID: 389252153}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1375206964
 PrefabInstance:
   m_ObjectHideFlags: 0
