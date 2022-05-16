@@ -10,6 +10,7 @@ public class SceneController : MonoBehaviour
 
     public void ChangeScene(string nome)
     {
+        Resume();
         SceneManager.LoadScene(nome);
     }
 
