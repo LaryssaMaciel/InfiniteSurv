@@ -92,7 +92,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8807136954148099224}
         m_TargetAssemblyTypeName: ConfigManager, Assembly-CSharp
-        m_MethodName: SetMusVolume
+        m_MethodName: SetGamVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
