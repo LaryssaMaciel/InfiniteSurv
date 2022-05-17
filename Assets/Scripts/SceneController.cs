@@ -22,6 +22,7 @@ public class SceneController : MonoBehaviour
     IEnumerator Wait(string nome) 
     {
         yield return new WaitForSeconds(1f);
+        Resume();
         SceneManager.LoadScene(nome);
     }
 
