@@ -7,15 +7,15 @@ public class Inimigo : MonoBehaviour
     public float cooldown = .5f, dano = 10, vida = 30;
     private float speed = .01f;
 
-    private bool playerInRange = false, canAttack = true;
-    public bool atacou = false;
+    public bool playerInRange = false, canAttack = true;
+    public bool atacou = false, still = false; // morrendo
 
     private Vector3 offset;
 
     private GameObject player, explosion;
     private SpriteRenderer sp;
     public Rigidbody2D rb;
-    private GameObject cam;
+    public GameObject cam; 
 
     void Awake()
     {
@@ -29,19 +29,14 @@ public class Inimigo : MonoBehaviour
 
     void Update()
     {
-        
-
-        if (vida <= 0) 
-        {
-            StartCoroutine(Death()); 
-        }
-        else
+        if (!still) // se nao ta morrendo
         {
             Ataque();
             Flip();
-
-            if (!atacou) { Mover(); }
+            if (vida <= 0) { StartCoroutine(Death()); }
         }
+        if (!atacou && !still) { Mover(); }
+        
     }
 
     IEnumerator Death()
@@ -74,6 +69,7 @@ public class Inimigo : MonoBehaviour
     {
         if (playerInRange && canAttack && player.GetComponent<Player>().canDano)
         {
+            still = true;
             player.GetComponent<Player>().vida -= dano;
             atacou = true;
             StartCoroutine(AttackCooldown());
@@ -104,6 +100,7 @@ public class Inimigo : MonoBehaviour
     IEnumerator AttackCooldown()
     {
         canAttack = false;
+        player.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .5f);
         player.GetComponent<Player>().canDano = false;
         player.GetComponent<Player>().damaged = true;
         cam.GetComponent<CameraShake>().shake = true;
@@ -111,8 +108,10 @@ public class Inimigo : MonoBehaviour
         yield return new WaitForSeconds(cooldown);
 
         player.GetComponent<Player>().canDano = true;
-        
+        player.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+
         canAttack = true;
         atacou = false;
+        still = false;
     }
 }

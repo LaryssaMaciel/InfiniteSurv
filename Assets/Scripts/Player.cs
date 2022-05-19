@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
     
     void FixedUpdate()
     {
-        Movimentacao(); 
+        if (!dead) { Movimentacao(); }
     }
 
     void Animacoes()
@@ -132,7 +132,14 @@ public class Player : MonoBehaviour
             cm.lista.Add("tiro");
             Destroy(col.gameObject);
         }
+
+        if (col.gameObject.tag == "Enemy")
+        {
+            obj = col.gameObject;
+        }
     }
+
+    private GameObject obj;
 
     void VidaManager()
     {
@@ -165,6 +172,9 @@ public class Player : MonoBehaviour
     
     void Movimentacao()
     {
+        if (!canDano) { movSpeed = 4f; }
+        else { movSpeed = 5;  }
+
         mov = new Vector2(fj.Horizontal * moveforce, fj.Vertical * moveforce);
         rb.MovePosition(rb.position + mov.normalized * movSpeed * Time.fixedDeltaTime);
         rbmov = rb.position;
@@ -269,4 +279,21 @@ public class Player : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
     }
+
+    //public IEnumerator TakeDamageCoolDown(float cooldown)
+    //{
+    //    obj.GetComponent<Inimigo>().canAttack = false;
+    //    gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .5f);
+    //    canDano = false;
+    //    damaged = true;
+    //    obj.GetComponent<Inimigo>().cam.GetComponent<CameraShake>().shake = true;
+
+    //    yield return new WaitForSeconds(cooldown);
+
+    //    canDano = true;
+    //    gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+
+    //    obj.GetComponent<Inimigo>().canAttack = true;
+    //    obj.GetComponent<Inimigo>().atacou = false;
+    //}
 }
