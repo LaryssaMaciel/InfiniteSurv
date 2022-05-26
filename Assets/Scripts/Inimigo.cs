@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Inimigo : MonoBehaviour
 {
-    public float cooldown = .5f, dano = 10, vida = 30;
-    private float speed = .01f;
+    public float cooldown = .5f, dano = 10, vida = 30, speed = .01f;
 
     public bool playerInRange = false, canAttack = true;
     public bool atacou = false, still = false; // morrendo

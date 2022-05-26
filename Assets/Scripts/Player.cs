@@ -256,7 +256,7 @@ public class Player : MonoBehaviour
         {
             if (timeBtwAttack <= 0)
             {
-                startTimeBtwAttack = .2f;
+                startTimeBtwAttack = .15f;
                 timeBtwAttack = startTimeBtwAttack;
                 Tiro();
             }
