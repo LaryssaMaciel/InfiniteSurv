@@ -14,13 +14,14 @@ public class SceneController : MonoBehaviour
 
     public void ChangeScene(string nome)
     {
+        Resume();
         animFade.SetTrigger("go");
         StartCoroutine(Wait(nome));
     }
     IEnumerator Wait(string nome) 
     {
         yield return new WaitForSeconds(1f);
-        Resume();
+        //Resume();
         SceneManager.LoadScene(nome);
     }
 

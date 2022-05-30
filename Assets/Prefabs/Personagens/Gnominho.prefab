@@ -139,7 +139,7 @@ MonoBehaviour:
   cooldown: 0.5
   dano: 5
   vida: 5
-  speed: 0.015
+  speed: 0.05
   playerInRange: 0
   canAttack: 1
   atacou: 0

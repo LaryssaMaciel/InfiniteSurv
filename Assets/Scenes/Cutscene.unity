@@ -397,7 +397,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   video:
   - {fileID: 32900000, guid: 6710864f579b9c6488ded13e275f74db, type: 3}
-  - {fileID: 32900000, guid: a94ce07d2eddeff43ae908e5938348e4, type: 3}
   clip: 0
 --- !u!1 &1119151355
 GameObject:

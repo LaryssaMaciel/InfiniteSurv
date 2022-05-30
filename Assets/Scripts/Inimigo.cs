@@ -32,10 +32,9 @@ public class Inimigo : MonoBehaviour
         {
             Ataque();
             Flip();
+            if (!atacou) { Mover(); }
             if (vida <= 0) { StartCoroutine(Death()); }
         }
-        if (!atacou && !still) { Mover(); }
-        
     }
 
     IEnumerator Death()
@@ -51,11 +50,11 @@ public class Inimigo : MonoBehaviour
     {
         if (player.transform.position.x < this.transform.position.x)
         {
-            this.gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            this.gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
         else
         {
-            this.gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            this.gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
     }
 

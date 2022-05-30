@@ -51,6 +51,7 @@ public class WavesManager : MonoBehaviour
         {   // nº q quer - 1 (resolver isso)
             // wave 1
             case 2 -1: 
+                timeAtual = 0;
                 tipo = 0; spawns = 2; break;
             // wave 2 a 4
             case 3 -1: 

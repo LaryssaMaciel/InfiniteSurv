@@ -71,6 +71,8 @@ public class Player : MonoBehaviour
         imgB.SetActive(false);
         vida = fullvida;
         LimitCamera();
+
+        //if (Application.isMobilePlatform) { QualitySettings.vSyncCount = 0; }
     }
  
     void Update()
