@@ -67,6 +67,9 @@ public class Player : MonoBehaviour
         imgB = GameObject.FindGameObjectWithTag("imgB");
         fj = GameObject.FindGameObjectWithTag("joystick").GetComponent<FixedJoystick>();
         fjatk = GameObject.FindGameObjectWithTag("fjatk").GetComponent<FixedJoystick>();
+        audioSource = GetComponent<AudioSource>();
+        audioSource1 = GameObject.Find("AtaqueRange").GetComponent<AudioSource>();
+        audioSource2 = GameObject.Find("ShootPoint").GetComponent<AudioSource>();
 
         imgB.SetActive(false);
         vida = fullvida;
@@ -94,6 +97,13 @@ public class Player : MonoBehaviour
         if (!dead) { Movimentacao(); }
     }
 
+    public AudioSource audioSource, audioSource1, audioSource2; 
+    public void AudioManager(AudioSource audios, int audio)
+    {
+        audios.clip = sm.som[audio];
+        audios.Play();
+    }
+
     void Animacoes()
     {
         if (!damaged && !swing && !dead)
@@ -103,7 +113,7 @@ public class Player : MonoBehaviour
         }
 
         if (swing) { animator.SetTrigger("swing"); swing = false; }
-        if (damaged) { animator.SetTrigger("damaged"); damaged = false; }
+        if (damaged) { animator.SetTrigger("damaged"); AudioManager(audioSource, 0); damaged = false; }
         if (dead) { animator.SetTrigger("dead"); }
     } 
 
@@ -171,7 +181,7 @@ public class Player : MonoBehaviour
         if (vidasExtra <= 0) { vidasBtn.SetActive(false); }
         else { vidasBtn.SetActive(true); }
     }
-    
+    private bool ismoving = false;
     void Movimentacao()
     {
         if (!canDano) { movSpeed = 4f; }
@@ -230,6 +240,7 @@ public class Player : MonoBehaviour
 
     public void Ataque1() // ataque curta distancia
     {
+        AudioManager(audioSource1, 3);
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemiesLayer);
         if (enemies != null)
         {
@@ -238,6 +249,7 @@ public class Player : MonoBehaviour
                 enemies[i].GetComponent<Inimigo>().vida -= ataqueValor;
                 Vector3 direction = (enemies[i].transform.position - transform.position);
                 enemies[i].GetComponent<Inimigo>().rb.AddForce(direction * 500);
+                
                 StartCoroutine(AttackCooldown(enemies[i]));
             }
         }
@@ -245,6 +257,7 @@ public class Player : MonoBehaviour
 
     public void Tiro() // ataque longa distancia
     {
+        AudioManager(audioSource1, 4);
         GameObject a = Instantiate(pTiro, posTiro.transform.position, posTiro.transform.rotation);
         float angle = Mathf.Atan2(fjatk.Horizontal, fjatk.Vertical) * Mathf.Rad2Deg;
         posTiro.transform.eulerAngles = new Vector3(0, 0, -angle);
@@ -270,6 +283,7 @@ public class Player : MonoBehaviour
     IEnumerator AttackCooldown(Collider2D obj) // no inimigo
     {
         obj.GetComponent<SpriteRenderer>().color = Color.red;
+        this.obj.GetComponent<Inimigo>().AudioManager(0);
         
         yield return new WaitForSeconds(.5f);
 

@@ -49,7 +49,14 @@ MonoBehaviour:
   configPanel: {fileID: 0}
   menu: {fileID: 0}
   credits: {fileID: 0}
-  som: []
+  som:
+  - {fileID: 8300000, guid: 254972dcbaf1edd449473ed5042959df, type: 3}
+  - {fileID: 8300000, guid: 7c74ab7908306174f803484ec28a8aee, type: 3}
+  - {fileID: 8300000, guid: 0f45f4d6d84d7f244b8e0368c87cba4e, type: 3}
+  - {fileID: 8300000, guid: 2c6b46993ba90a54085c2832e5dbf501, type: 3}
+  - {fileID: 8300000, guid: c4d982c2c2ca9834aa1b5bfb504bd337, type: 3}
+  - {fileID: 8300000, guid: bd9f3f3a569759946bf2d5a0884aac9c, type: 3}
+  - {fileID: 8300000, guid: 337e1bb70603885419f9331e506578d5, type: 3}
   musicasCena: []
   audioSource: {fileID: 4842771419843131498}
   MusMixer: {fileID: 24100000, guid: 0631895f551399748a38a8698e3d742c, type: 2}
@@ -67,7 +74,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 0631895f551399748a38a8698e3d742c, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

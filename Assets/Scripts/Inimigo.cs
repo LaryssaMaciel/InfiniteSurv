@@ -15,6 +15,8 @@ public class Inimigo : MonoBehaviour
     private SpriteRenderer sp;
     public Rigidbody2D rb;
     public GameObject cam; 
+    public AudioSource audioSource; 
+    public AudioClip[] som;
 
     void Awake()
     {
@@ -24,6 +26,7 @@ public class Inimigo : MonoBehaviour
         cam = GameObject.Find("CM vcam1");
         offset = new Vector3(.5f,0,0);
         sp = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -63,6 +66,12 @@ public class Inimigo : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position - offset, speed * Time.timeScale);
     }
 
+    public void AudioManager(int audio)
+    {
+        audioSource.clip = som[audio];
+        audioSource.Play();
+    }
+
     void Ataque()
     {
         if (playerInRange && canAttack && player.GetComponent<Player>().canDano)
@@ -83,6 +92,7 @@ public class Inimigo : MonoBehaviour
         if (col.gameObject.tag == "bullet")
         {
             this.vida -= player.GetComponent<Player>().ataqueValor;
+            this.AudioManager(0);
             Destroy(col.gameObject);
         }
     }

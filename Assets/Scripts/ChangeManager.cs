@@ -44,6 +44,7 @@ public class ChangeManager : MonoBehaviour
     public void Troca()
     {
         itemNum++;
+        player.AudioManager(player.audioSource1, 2);
         print(lista[itemNum]);
     }
 
