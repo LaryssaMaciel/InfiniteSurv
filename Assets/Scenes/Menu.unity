@@ -295,12 +295,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1700603517}
-  m_RootOrder: 1
+  m_Father: {fileID: 1387870080}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 142.922, y: 50.81102}
+  m_AnchoredPosition: {x: 298, y: 104}
   m_SizeDelta: {x: 33.92, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &759478136
@@ -426,13 +426,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1700603517}
-  m_RootOrder: 0
+  m_Father: {fileID: 1387870080}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.7590027, y: 0.8690033}
-  m_SizeDelta: {x: -21.678009, y: -20.490005}
+  m_AnchoredPosition: {x: -6.3714, y: 1.8853989}
+  m_SizeDelta: {x: 639.6245, y: 221.9737}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &810216490
 MonoBehaviour:
@@ -467,9 +467,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Laryssa F. Maciel
-
-    Marcel Santos'
+  m_Text: "Programa\xE7\xE3o, Anima\xE7\xE3o, Game Design, Arte\nLaryssa F. Maciel\n\nArte,
+    Anima\xE7\xE3o, Game Design\nMarcel Santos"
 --- !u!222 &810216491
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -802,6 +801,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1700603517}
+  - {fileID: 810216489}
+  - {fileID: 759478135}
   m_Father: {fileID: 1865532429}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -989,10 +990,8 @@ RectTransform:
   m_GameObject: {fileID: 1700603516}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 810216489}
-  - {fileID: 759478135}
+  m_LocalScale: {x: 1.8375, y: 1.5125, z: 1}
+  m_Children: []
   m_Father: {fileID: 1387870080}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
