@@ -23,6 +23,8 @@ public class WavesManager : MonoBehaviour
         timeAtual -= Time.deltaTime;
 
         Spawnar(inimigos[tipo]);
+
+        if (wave > (67 -1)) { wave = 2; }
     }
 
     void Spawnar(GameObject inimigo)
