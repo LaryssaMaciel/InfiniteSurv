@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
     [Header("Animacao")]
     public string animState = "idle";
     private bool swing = false, dead = false;
-    private Animator animator;
+    public Animator animator;
 
     // others
     private ChangeManager cm;
@@ -116,7 +116,14 @@ public class Player : MonoBehaviour
             animator.SetFloat("vertical", rbmov.y);
         }
 
-        if (swing) { animator.SetTrigger("swing"); swing = false; }
+        if (swing) 
+        {
+            animator.SetTrigger("swing");
+            if (tipoAtaque != "tiro") 
+            {
+                swing = false;
+            }
+        }
         if (damaged) { animator.SetTrigger("damaged"); AudioManager(audioSource, 0); damaged = false; }
         if (dead) { animator.SetTrigger("dead"); }
     } 
@@ -185,7 +192,7 @@ public class Player : MonoBehaviour
         if (vidasExtra <= 0) { vidasBtn.SetActive(false); }
         else { vidasBtn.SetActive(true); }
     }
-    private bool ismoving = false;
+    //private bool ismoving = false;
     void Movimentacao()
     {
         if (!canDano) { movSpeed = 4f; }
@@ -240,7 +247,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Atk2Up() { atk2down = false; }
+    public void Atk2Up() { atk2down = false; swing = false; }
 
     public void Ataque1() // ataque curta distancia
     {

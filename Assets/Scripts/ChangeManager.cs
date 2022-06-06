@@ -34,11 +34,13 @@ public class ChangeManager : MonoBehaviour
                 item = "Axe";
                 image.sprite = img[0];
                 player.tipoAtaque = "axe";
+                player.animator.SetFloat("weapon", 0);
                 break;
             case "tiro":
                 item = "Gun";
                 image.sprite = img[1];
                 player.tipoAtaque = "tiro";
+                player.animator.SetFloat("weapon", 1);
                 break;
             // case "cura":
             //     item = "Health\n" + player.vidasExtra.ToString();
