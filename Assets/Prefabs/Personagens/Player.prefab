@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 4158846056504510748}
   - component: {fileID: 1863976388449753152}
   - component: {fileID: 4973623702359409604}
+  - component: {fileID: 3732738415003944035}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -237,7 +238,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &6569804721665118152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,6 +414,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!70 &3732738415003944035
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569804721665118155}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.3, y: 0}
+  m_Size: {x: 1.69, y: 3.2}
+  m_Direction: 0
 --- !u!1 &6569804723261358473
 GameObject:
   m_ObjectHideFlags: 0

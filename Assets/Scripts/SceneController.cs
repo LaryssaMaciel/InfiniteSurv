@@ -104,18 +104,18 @@ public class SceneController : MonoBehaviour
     {   // configura variaveis
         audioSource = GetComponent<AudioSource>();
         sceneName = SceneManager.GetActiveScene().name.ToString();
-        // switch (sceneName)
-        // {   // define musica principal da cena
-        //     case "Menu":
-        //         AudioManager(0); // som de menu
-        //         break;
-        //     case "Jogo":
-        //         AudioManager(0);
-        //         break;
-        //     case "GameOver":
-        //         AudioManager(0); // som de gameplay
-        //         break;
-        // }
+        switch (sceneName)
+        {   // define musica principal da cena
+            case "Menu":
+                AudioManager(0); // som de menu
+                break;
+            case "Jogo":
+                AudioManager(1);
+                break;
+            case "GameOver":
+                AudioManager(2); // som de gameplay
+                break;
+        }
         // pega valores salvos das configuracoes de audio
         musVol = PlayerPrefs.GetFloat("musicaVol");
         SetMusVolume(musVol);

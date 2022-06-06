@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 
     [Header("VIDA")]
     public Image hpBar;
-    public float vida, fullvida = 100, cura = 10;
+    public float vida, fullvida = 100, cura = 25;
 
     [Header("CURA")]
     public int vidasExtra = 0;
@@ -80,16 +80,20 @@ public class Player : MonoBehaviour
  
     void Update()
     {
+        rbmov = mov;
+
         if (timeBtwAttack <= 0) { timeBtwAttack = 0; }
         else { timeBtwAttack -= Time.deltaTime; }
 
         if (dead) { canDano = false; }
+        else { 
+            CuraManager();
+            Ataque2(); 
+            FlipManager();
+        }
 
         VidaManager();
-        CuraManager();
-        FlipManager();
         Animacoes();
-        Ataque2();
     } 
     
     void FixedUpdate()
@@ -189,7 +193,7 @@ public class Player : MonoBehaviour
 
         mov = new Vector2(fj.Horizontal * moveforce, fj.Vertical * moveforce);
         rb.MovePosition(rb.position + mov.normalized * movSpeed * Time.fixedDeltaTime);
-        rbmov = rb.position;
+        
     }
 
     void Flip()
@@ -212,7 +216,7 @@ public class Player : MonoBehaviour
 
     public void Ataque() // curta distancia
     {
-        if (timeBtwAttack <= 0)
+        if (timeBtwAttack <= 0 && !dead)
         {
             canAttack = true;
             if (tipoAtaque == "axe")
@@ -271,7 +275,7 @@ public class Player : MonoBehaviour
         {
             if (timeBtwAttack <= 0)
             {
-                startTimeBtwAttack = .15f;
+                startTimeBtwAttack = .25f;
                 timeBtwAttack = startTimeBtwAttack;
                 Tiro();
             }
@@ -283,6 +287,7 @@ public class Player : MonoBehaviour
     IEnumerator AttackCooldown(Collider2D obj) // no inimigo
     {
         obj.GetComponent<SpriteRenderer>().color = Color.red;
+        obj.GetComponent<Inimigo>().damaged = true;
         this.obj.GetComponent<Inimigo>().AudioManager(0);
         
         yield return new WaitForSeconds(.5f);

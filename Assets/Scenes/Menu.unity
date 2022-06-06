@@ -768,6 +768,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'SceneManager '
       objectReference: {fileID: 0}
+    - target: {fileID: 4842771419843131498, guid: eb411977385c5124f9c8a10eff919d5b, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842771419843131498, guid: eb411977385c5124f9c8a10eff919d5b, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 679a5c7228accc64c80526409ac1ef0e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb411977385c5124f9c8a10eff919d5b, type: 3}
 --- !u!1 &916750856 stripped

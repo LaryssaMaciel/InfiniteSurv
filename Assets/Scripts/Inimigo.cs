@@ -14,9 +14,11 @@ public class Inimigo : MonoBehaviour
     private GameObject player, explosion;
     private SpriteRenderer sp;
     public Rigidbody2D rb;
+    public Vector2 rbmov;
     public GameObject cam; 
     public AudioSource audioSource; 
     public AudioClip[] som;
+    public Animator anim;
 
     void Awake()
     {
@@ -27,10 +29,13 @@ public class Inimigo : MonoBehaviour
         offset = new Vector3(.5f,0,0);
         sp = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
+        
+
         if (!still) // se nao ta morrendo
         {
             Ataque();
@@ -38,6 +43,8 @@ public class Inimigo : MonoBehaviour
             if (!atacou) { Mover(); }
             if (vida <= 0) { StartCoroutine(Death()); }
         }
+
+        Animacoes();
     }
 
     IEnumerator Death()
@@ -60,10 +67,14 @@ public class Inimigo : MonoBehaviour
             this.gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
     }
-
+    public Vector3 direction;
     void Mover()
     {
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position - offset, speed * Time.timeScale);
+        // direction = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        // this.rbmov.y = direction.y;
+        if (player.transform.position.y - this.transform.position.y > 1f) { rbmov.y = 1f; }
+        if (player.transform.position.y - this.transform.position.y < -1f) { rbmov.y = -1f; }
     }
 
     public void AudioManager(int audio)
@@ -79,6 +90,7 @@ public class Inimigo : MonoBehaviour
             still = true;
             player.GetComponent<Player>().vida -= dano;
             atacou = true;
+            swing = true;
             StartCoroutine(AttackCooldown());
         }
     }
@@ -104,6 +116,20 @@ public class Inimigo : MonoBehaviour
             playerInRange = false;
         }
     }
+
+    private bool swing = false; 
+    public bool damaged = false;
+
+    void Animacoes()
+    {
+        if (!damaged && !swing)
+        {
+            anim.SetFloat("vertical", rbmov.y);
+        }
+
+        if (swing) { anim.SetTrigger("swing"); swing = false; }
+        if (damaged) { anim.SetTrigger("damage"); damaged = false; }
+    } 
 
     IEnumerator AttackCooldown()
     {

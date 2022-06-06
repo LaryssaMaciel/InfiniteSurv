@@ -899,5 +899,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4842771419843131498, guid: eb411977385c5124f9c8a10eff919d5b, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2d99a767df07f96459e60e32ece47ade, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb411977385c5124f9c8a10eff919d5b, type: 3}

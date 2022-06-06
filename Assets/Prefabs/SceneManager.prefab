@@ -57,7 +57,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c4d982c2c2ca9834aa1b5bfb504bd337, type: 3}
   - {fileID: 8300000, guid: bd9f3f3a569759946bf2d5a0884aac9c, type: 3}
   - {fileID: 8300000, guid: 337e1bb70603885419f9331e506578d5, type: 3}
-  musicasCena: []
+  musicasCena:
+  - {fileID: 8300000, guid: 679a5c7228accc64c80526409ac1ef0e, type: 3}
+  - {fileID: 8300000, guid: 1cd533ad84dcc564d9badf73f09b81b8, type: 3}
+  - {fileID: 8300000, guid: 2d99a767df07f96459e60e32ece47ade, type: 3}
   audioSource: {fileID: 4842771419843131498}
   MusMixer: {fileID: 24100000, guid: 0631895f551399748a38a8698e3d742c, type: 2}
   GamMixer: {fileID: 24100000, guid: 60eace999d6e841419691b0e9121b004, type: 2}
