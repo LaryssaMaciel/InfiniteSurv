@@ -97,7 +97,7 @@ public class SceneController : MonoBehaviour
     [Header("Sliders config. audio")]
     public Slider sliMus, sliGam;
 
-    private float musVol = 1, gameVol = 1; // volumes
+    private float musVol = .5f, gameVol = .5f; // volumes
     private string sceneName; // nome da cena
 
     void Start()

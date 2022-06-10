@@ -13,6 +13,8 @@ public class FirstTimeGame : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("FirstTimeOpening", 1) == 1)
         {
+            PlayerPrefs.SetFloat("musicaVol", -20);
+            PlayerPrefs.SetFloat("gameVol", -20);
             Debug.Log("First Time Opening");
             PlayerPrefs.GetInt("firstTime", 0);
             PlayerPrefs.GetInt("Clip", 0);
