@@ -8,6 +8,7 @@ public class WavesManager : MonoBehaviour
     public GameObject[] inimigos;
     float timer = 5; // tempo entre waves 
     float spawns = 3; // tanto de inimigos pra spawnar
+    int limit = 20;
     int tipo = 0; // tipo de inimigo baseado no array inimigos
     public float timeAtual, wave = 2;
     
@@ -22,7 +23,11 @@ public class WavesManager : MonoBehaviour
         WavesManager_();
         timeAtual -= Time.deltaTime;
 
-        Spawnar(inimigos[tipo]);
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length <= limit)
+        {
+            Spawnar(inimigos[tipo]);
+        }
+        
 
         if (wave > (67 -1)) { wave = 2; }
     }
